@@ -10,17 +10,18 @@ It supports values without section, automatically converts numeric values, autom
 
 Configurations are easy as they should be in Python!
 
+Requirements
+============
+
+python3
+
 Installation
 ============
 
-.. note:: Not *yet* in the Cheeseshop
-
-Place the file ``configs.py`` into your project directory. That's it.
+    pip install configs
 
 Usage
 =====
-
-.. code-block:: python
 
     import configs
 
