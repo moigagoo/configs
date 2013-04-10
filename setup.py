@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='configs',
-      version='0.2',
+      version='0.3',
       description='Configuration for humans',
       author='Konstantin Molchanov',
       author_email='moigagoo@myopera.com',
@@ -9,26 +9,26 @@ setup(name='configs',
       py_modules=['configs'],
       license='MIT',
       long_description="""
-      configs: Configuration for Humans
-      ==================================
+configs: Configuration for Humans
+==================================
 
-      Parsing INI-format configurations with the standard library configparser is painful.
+Parsing INI-format configurations with the standard library configparser is painful.
 
-      **configs** provides an easy and clean API for configuration file parsing.
+**configs** provides an easy and clean API for configuration file parsing.
 
-      It supports values without section, automatically converts numeric values, automatically handles sections with listed values as lists.
+It supports values without section, automatically converts numeric values, automatically handles sections with listed values as lists.
 
-      Configurations are easy as they should be in Python!
+Configurations are easy as they should be in Python!
 
-      Installation
-      ------------
+Installation
+------------
 
-      pip install configs
+    pip install configs
 
-      Usage
-      -----
+Usage
+-----
 
-      Sample config (``sample.conf``):
+Sample config (``sample.conf``):
 
     top_level = value
 
@@ -45,11 +45,11 @@ setup(name='configs',
     prop = val
     flag
 
-    Usage:
+Usage:
 
-        >>> import configs
+    >>> import configs
 
-        >>> conf = configs.load('sample.conf')
+    >>> conf = configs.load('sample.conf')
 
     >>> print(conf)                         #All config values
     {'general': {'foo': 'bar', 'spam': 'eggs'}, 'root': {'top_level': 'value'}, 'list_section': [1, 2.2, 3], 'mixed': (['flag'], {'prop': 'val'})}
