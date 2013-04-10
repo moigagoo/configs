@@ -4,8 +4,8 @@ import re
 
 #Regexs for INI header, key-value, and flag item parsing
 header = re.compile('^\s*\[\s*(?P<section>\w+)\s*\]\s*$')
-dict_item = re.compile('^\s*(?P<key>\w+)\s*\=\s*(?P<value>[\S]+)\s*$')
-list_item = re.compile('^\s*(?P<value>[\S]+)\s*$')
+dict_item = re.compile('^\s*(?P<key>\w+)\s*\=\s*(?P<value>.+)\s*$')
+list_item = re.compile('^\s*(?P<value>.+)\s*$')
 
 class Section:
     """INI configuration section
