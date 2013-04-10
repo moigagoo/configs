@@ -1,6 +1,5 @@
-*********************************
 configs: Configuration for Humans
-*********************************
+==================================
 
 Parsing INI-format configurations with the standard library configparser is painful.
 
@@ -10,18 +9,13 @@ It supports values without section, automatically converts numeric values, autom
 
 Configurations are easy as they should be in Python!
 
-Requirements
-============
-
-python3
-
 Installation
-============
+------------
 
     pip install configs
 
 Usage
-=====
+-----
 
     import configs
 
