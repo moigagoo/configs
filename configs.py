@@ -4,8 +4,8 @@ import re
 
 #Regexs for INI header, key-value, and flag item parsing
 header = re.compile('^\s*\[\s*(?P<section>\w+)\s*\]\s*$')
-dict_item = re.compile('^\s*(?P<key>\w+)\s*(\=|\:)\s*(?P<value>.+)\s*$')
-list_item = re.compile('^\s*(?P<value>.+)\s*$')
+dict_item = re.compile('^\s*(?P<key>\w+)\s*(\=|\:)\s*(?P<value>[\S]+)\s*$')
+list_item = re.compile('^\s*(?P<value>[\S]+)\s*$')
 
 class Section:
     """INI configuration section
@@ -78,45 +78,45 @@ class Section:
 
         try:
             return self.list_props[key]
-        except KeyError:
+        except (KeyError, TypeError):
             pass
 
-        return None
+        raise KeyError
 
 
-class Config(dict):
+class Config:
     """Parsed configuration.
 
     Config consists of Sections.
     """
     def __init__(self):
-        super(dict, self).__init__()
+        self.sections = {}
 
         self._add_section('root')
 
     def get(self):
-        """Gets all sections."""
+        """Gets all section items."""
 
-        return {section: self[section].get() for section in self}
+        return {section: self.sections[section].get() for section in self.sections}
 
     def _add_section(self, name):
         """Adds an empty section with the given name."""
 
-        self[name] = Section()
+        self.sections[name] = Section()
 
     def _add_dict_prop_to_section(self, key, value, section='root'):
         """Adds a key-value item to the given section."""
 
-        if section in self:
-            self[section]._add_dict_prop(key, value)
+        if section in self.sections:
+            self.sections[section]._add_dict_prop(key, value)
         else:
             raise KeyError
 
     def _add_list_prop_to_section(self, value, section='root'):
         """Adds a flag value to the given section."""
 
-        if section in self:
-            self[section]._add_list_prop(value)
+        if section in self.sections:
+            self.sections[section]._add_list_prop(value)
         else:
             raise KeyError
 
@@ -125,6 +125,18 @@ class Config(dict):
 
     def __str__(self):
         return str(self.get())
+
+    def __getitem__(self, key):
+        if key in self.sections:
+            return self.sections[key]
+        else:
+            try:
+                return self.sections['root'][key]
+            except KeyError:
+                pass
+
+        raise KeyError
+
 
 def load(config_file):
     """Parse an INI configuration file.
@@ -144,6 +156,8 @@ def load(config_file):
                 if not current_section in config:
                     config._add_section(current_section)
 
+                continue
+
             dict_item_match = re.match(dict_item, line)
             if dict_item_match:
                 key, value = dict_item_match.group('key'), dict_item_match.group('value')
@@ -153,6 +167,8 @@ def load(config_file):
                 else:
                     config._add_dict_prop_to_section(key, value)
 
+                continue
+
             list_item_match = re.match(list_item, line)
             if list_item_match:
                 value = list_item_match.group('value')
@@ -160,6 +176,8 @@ def load(config_file):
                     config._add_list_prop_to_section(value, current_section)
                 else:
                     config._add_list_prop_to_section(value)
+
+                continue
 
     return config
 
