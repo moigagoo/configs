@@ -81,7 +81,7 @@ class Section:
         except (KeyError, TypeError):
             pass
 
-        raise KeyError
+        return None
 
 
 class Config:
@@ -135,7 +135,7 @@ class Config:
             except KeyError:
                 pass
 
-        raise KeyError
+        return None
 
 
 def load(config_file):
