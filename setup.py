@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='configs',
-    version='0.4',
+    version='0.5',
     description='Configuration for humans',
     author='Konstantin Molchanov',
     author_email='moigagoo@myopera.com',
@@ -37,16 +37,23 @@ Sample config (``sample.conf``):
     top_level = value
 
     [general]
+
     spam = eggs
+
     foo: bar
 
     [list_section]
+
     1
+
     2.2
+
     3
 
     [mixed]
+
     prop = val
+
     flag
 
 Usage:
