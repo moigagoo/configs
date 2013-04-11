@@ -83,21 +83,65 @@ class Section:
 
         return None
 
+    def __eq__(self, other):
+        return self.dict_props == other.dict_props and self.list_props == other.list_props
 
 class Config:
     """Parsed configuration.
 
     Config consists of Sections.
     """
-    def __init__(self):
+    def __init__(self, config_file=None):
         self.sections = {}
 
         self._add_section('root')
+        
+        if config_file:
+            self.load(config_file)
 
     def get(self):
         """Gets all section items."""
 
         return {section: self.sections[section].get() for section in self.sections}
+
+    def load(self, config_file):
+        """Parse an INI configuration file.
+
+        :returns: Config instance.
+        """
+        
+        current_section = None
+
+        with open(config_file, 'r') as f:
+            for line in f.readlines():
+                header_match = re.match(header, line)
+                if header_match:
+                    current_section = header_match.group('section')
+                    if not current_section in self.sections:
+                        self._add_section(current_section)
+
+                    continue
+
+                dict_item_match = re.match(dict_item, line)
+                if dict_item_match:
+                    key, value = dict_item_match.group('key'), dict_item_match.group('value')
+
+                    if current_section:
+                        self._add_dict_prop_to_section(key, value, current_section)
+                    else:
+                        self._add_dict_prop_to_section(key, value)
+
+                    continue
+
+                list_item_match = re.match(list_item, line)
+                if list_item_match:
+                    value = list_item_match.group('value')
+                    if current_section:
+                        self._add_list_prop_to_section(value, current_section)
+                    else:
+                        self._add_list_prop_to_section(value)
+
+                    continue
 
     def _add_section(self, name):
         """Adds an empty section with the given name."""
@@ -136,50 +180,13 @@ class Config:
                 pass
 
         return None
+    
+    def __eq__(self, other):
+        return self.sections == other.sections
 
 
 def load(config_file):
-    """Parse an INI configuration file.
-
-    :returns: Config instance.
-    """
-
-    config = Config()
-
-    current_section = None
-
-    with open(config_file, 'r') as f:
-        for line in f.readlines():
-            header_match = re.match(header, line)
-            if header_match:
-                current_section = header_match.group('section')
-                if not current_section in config:
-                    config._add_section(current_section)
-
-                continue
-
-            dict_item_match = re.match(dict_item, line)
-            if dict_item_match:
-                key, value = dict_item_match.group('key'), dict_item_match.group('value')
-
-                if current_section:
-                    config._add_dict_prop_to_section(key, value, current_section)
-                else:
-                    config._add_dict_prop_to_section(key, value)
-
-                continue
-
-            list_item_match = re.match(list_item, line)
-            if list_item_match:
-                value = list_item_match.group('value')
-                if current_section:
-                    config._add_list_prop_to_section(value, current_section)
-                else:
-                    config._add_list_prop_to_section(value)
-
-                continue
-
-    return config
+    return Config(config_file)
 
 
 if __name__ == '__main__':
