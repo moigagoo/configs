@@ -2,10 +2,6 @@
 
 import re
 
-#Regexs for INI header, key-value, and flag item parsing
-header = re.compile('^\s*\[\s*(?P<section>\w+)\s*\]\s*$')
-dict_item = re.compile('^\s*(?P<key>\w+)\s*\=\s*(?P<value>.+)\s*$')
-list_item = re.compile('^\s*(?P<value>.+)\s*$')
 
 class Section:
     """INI configuration section
@@ -91,6 +87,12 @@ class Config:
 
     Config consists of Sections.
     """
+    
+    #Regexes for INI header, key-value, and flag item parsing
+    header = re.compile('^\s*\[\s*(?P<section>\w+)\s*\]\s*$')
+    dict_item = re.compile('^\s*(?P<key>\w+)\s*\=\s*(?P<value>.+)\s*$')
+    list_item = re.compile('^\s*(?P<value>.+)\s*$')
+    
     def __init__(self, config_file=None):
         self.sections = {}
 
@@ -114,7 +116,7 @@ class Config:
 
         with open(config_file, 'r') as f:
             for line in f.readlines():
-                header_match = re.match(header, line)
+                header_match = re.match(self.header, line)
                 if header_match:
                     current_section = header_match.group('section')
                     if not current_section in self.sections:
@@ -122,7 +124,7 @@ class Config:
 
                     continue
 
-                dict_item_match = re.match(dict_item, line)
+                dict_item_match = re.match(self.dict_item, line)
                 if dict_item_match:
                     key, value = dict_item_match.group('key'), dict_item_match.group('value')
 
@@ -133,7 +135,7 @@ class Config:
 
                     continue
 
-                list_item_match = re.match(list_item, line)
+                list_item_match = re.match(self.list_item, line)
                 if list_item_match:
                     value = list_item_match.group('value')
                     if current_section:
