@@ -183,5 +183,5 @@ def load(config_file):
 
 
 if __name__ == '__main__':
-    config = load('sample.conf')
+    config = load('test.conf')
     print(config)

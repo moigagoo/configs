@@ -17,31 +17,14 @@ Installation
 Usage
 -----
 
-Sample config (``sample.conf``):
-
-    top_level = value
-
-    [general]
-    spam = eggs
-    foo: bar
-
-    [list_section]
-    1
-    2.2
-    3
-
-    [mixed]
-    prop = val
-    flag
-
-Usage:
+Sample config is ``test.conf``:
 
     >>> import configs
 
-    >>> conf = configs.load('sample.conf')
+    >>> conf = configs.load('test/test.conf')
 
     >>> print(conf)                         #All config values
-    {'general': {'foo': 'bar', 'spam': 'eggs'}, 'root': {'top_level': 'value'}, 'list_section': [1, 2.2, 3], 'mixed': (['flag'], {'prop': 'val'})}
+    {'general': {'foo': 'bar', 'spam': 'eggs'}, 'list_section': [1, 2.2, 3], 'root': {'top_level': 'value', 'url': 'http://example.com', 'path': '../'}, 'mixed': (['flag'], {'prop': 'val'})}
 
     >>> print(conf['root'])                 #Top-level items are stored in the root section
     {'top_level': 'value'}
