@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='configs',
-    version='1.4',
+    version='1.5',
     description='Configuration for humans',
     author='Konstantin Molchanov',
     author_email='moigagoo@myopera.com',

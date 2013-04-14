@@ -89,6 +89,7 @@ class Config:
     """
 
     #Regexes for INI header, key-value, and flag item parsing
+    comment = re.compile('^\s*;.*$')
     header = re.compile('^\s*\[\s*(?P<section>\w+)\s*\]\s*$')
     dict_item = re.compile('^\s*(?P<key>\w+)\s*\=\s*(?P<value>.+)\s*$')
     list_item = re.compile('^\s*(?P<value>.+)\s*$')
@@ -118,11 +119,15 @@ class Config:
 
         with open(config_file, 'r') as f:
             for line in f.readlines():
+                comment_match = re.match(self.comment, line)
+                if comment_match:
+                    continue
+
                 header_match = re.match(self.header, line)
                 if header_match:
                     current_section = header_match.group('section')
-                    if not current_section in self.sections:
-                        self._add_section(current_section)
+                    #if not current_section in self.sections:
+                    self._add_section(current_section)
 
                     continue
 
@@ -201,5 +206,3 @@ if __name__ == '__main__':
 
     config_wo_fallback= load('test.conf')
     print('test.conf used without fallback:\n', config_wo_fallback)
-
-
