@@ -68,4 +68,4 @@ New in 1.4: fallback config:
     baz                                     #The value from ``test.conf`` overrides the value from ``fallback.conf``
 
     >>> print(conf_with_fallback['url'])
-    http://example.com                #The value missing in ``test.conf`` is taken from ``fallback.conf``
+    http://example.com                      #The value missing in ``test.conf`` is taken from ``fallback.conf``
