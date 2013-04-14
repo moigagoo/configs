@@ -87,17 +87,19 @@ class Config:
 
     Config consists of Sections.
     """
-    
+
     #Regexes for INI header, key-value, and flag item parsing
     header = re.compile('^\s*\[\s*(?P<section>\w+)\s*\]\s*$')
     dict_item = re.compile('^\s*(?P<key>\w+)\s*\=\s*(?P<value>.+)\s*$')
     list_item = re.compile('^\s*(?P<value>.+)\s*$')
-    
-    def __init__(self, config_file=None):
-        self.sections = {}
 
-        self._add_section('root')
-        
+    def __init__(self, config_file=None, fallback=None):
+        if fallback:
+            self.sections = fallback.sections
+        else:
+            self.sections = {}
+            self._add_section('root')
+
         if config_file:
             self.load(config_file)
 
@@ -111,7 +113,7 @@ class Config:
 
         :returns: Config instance.
         """
-        
+
         current_section = None
 
         with open(config_file, 'r') as f:
@@ -182,15 +184,22 @@ class Config:
                 pass
 
         return None
-    
+
     def __eq__(self, other):
         return self.sections == other.sections
 
 
-def load(config_file):
-    return Config(config_file)
-
+def load(config_file, fallback_file=None):
+    if fallback_file:
+        return Config(config_file, Config(fallback_file))
+    else:
+        return Config(config_file)
 
 if __name__ == '__main__':
-    config = load('test.conf')
-    print(config)
+    config_w_fallback = load('test.conf', fallback_file='fallback.conf')
+    print('test.conf used with fallback.conf as fallback:\n', config_w_fallback)
+
+    config_wo_fallback= load('test.conf')
+    print('test.conf used without fallback:\n', config_wo_fallback)
+
+

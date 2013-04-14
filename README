@@ -17,11 +17,11 @@ Installation
 Usage
 -----
 
-Sample config is ``test.conf``:
+Sample config is ``fallback.conf``:
 
     >>> import configs
 
-    >>> conf = configs.load('test/test.conf')
+    >>> conf = configs.load('test/fallback.conf')
 
     >>> print(conf)                         #All config values
     {'general': {'foo': 'bar', 'spam': 'eggs'}, 'list_section': [1, 2.2, 3], 'root': {'top_level': 'value', 'url': 'http://example.com', 'path': '../'}, 'mixed': (['flag'], {'prop': 'val'})}
@@ -55,8 +55,17 @@ Sample config is ``test.conf``:
     flag
     val
 
-    >>> print(mixed_section.dict_props)            #It is possible to get key-value items separetely...
+    >>> print(mixed_section.dict_props)     #It is possible to get key-value items separetely...
     {'prop': 'val'}
 
-    >>> print(mixed_section.list_props)            #...as well as list values
+    >>> print(mixed_section.list_props)     #...as well as list values
     ['flag']
+
+New in 1.4: fallback config:
+
+    >>> conf_with_fallback = configs.load('test/test.conf', fallback='test/fallback.conf')
+    >>> print(conf_with_fallback['general'])
+    baz                                     #The value from ``test.conf`` overrides the value from ``fallback.conf``
+
+    >>> print(conf_with_fallback['url'])
+    http://example.com                #The value missing in ``test.conf`` is taken from ``fallback.conf``
