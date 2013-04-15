@@ -64,7 +64,7 @@ class Section:
             yield list_prop
 
         for dict_prop in self.dict_props:
-            yield self.dict_props[dict_prop]
+            yield dict_prop
 
     def __getitem__(self, key):
         try:

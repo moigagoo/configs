@@ -24,10 +24,10 @@ Sample config is ``fallback.conf``:
     >>> conf = configs.load('test/fallback.conf')
 
     >>> print(conf)                         #All config values
-    {'general': {'foo': 'bar', 'spam': 'eggs'}, 'list_section': [1, 2.2, 3], 'root': {'top_level': 'value', 'url': 'http://example.com', 'path': '../'}, 'mixed': (['flag'], {'prop': 'val'})}
+    {'root': {'path': '../', 'top_level': 'value', 'url': 'http://example.com'}, 'mixed': (['flag'], {'prop': 'val'}), 'list_section': [1, 2.2, 3], 'general': {'spam': 'eggs', 'foo': 'bar'}}
 
     >>> print(conf['root'])                 #Top-level items are stored in the root section
-    {'top_level': 'value'}
+    {'path': '../', 'top_level': 'value', 'url': 'http://example.com'}
 
     >>> print(conf['general'])              #Values from the general section
     {'foo': 'bar', 'spam': 'eggs'}
@@ -43,17 +43,17 @@ Sample config is ``fallback.conf``:
     6
 
     >>> for k in conf['general']:           #Key-value sections are also iterable
-    ...     print(k)
+    ...     print(k, conf['general'][k])
     ...
-    eggs
-    bar
+    spam eggs
+    foo bar
 
     >>> mixed_section = conf['mixed']
     >>> for m in mixed_section:             #Even mixed sections are iterable: listed values first, key-value next
     ...     print(m)
     ...
     flag
-    val
+    prop
 
     >>> print(mixed_section.dict_props)     #It is possible to get key-value items separetely...
     {'prop': 'val'}
