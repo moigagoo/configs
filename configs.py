@@ -126,8 +126,8 @@ class Config:
                 header_match = re.match(self.header, line)
                 if header_match:
                     current_section = header_match.group('section')
-                    #if not current_section in self.sections:
-                    self._add_section(current_section)
+                    if not current_section in self.sections:
+                        self._add_section(current_section)
 
                     continue
 
