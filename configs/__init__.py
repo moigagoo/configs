@@ -1,9 +1,9 @@
 """
 *******
-configs
+Configs
 *******
 
-Configs is an INI configuration parsing package, written for humans.
+**Configs** is an INI configuration parsing package, written for humans.
 
 Basic usage
 ===========
@@ -21,6 +21,8 @@ Load a config file with a fallback config file (with default values)::
     eggs
 
 See full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
+
+The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/configs>`_.
 """
 
 __title__ = 'configs'

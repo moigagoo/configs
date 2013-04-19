@@ -8,7 +8,9 @@ Parsing INI configs must be easy, as are INI files.
 
 Loading data from a config is as easy as ``configs.load(my.conf)``.
 
-Configs work with both Python 2 and 3.
+``Configs`` work with both Python 2 and 3.
+
+The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/configs>`_.
 
 Features
 ========
@@ -28,7 +30,7 @@ Install configs with pip:
 .. code-block:: bash
 
     % pip install configs
-    
+
 Basic usage
 ===========
 Load a config file::
@@ -43,5 +45,5 @@ Load a config file with a fallback config file (with default values)::
     >>> fc = configs.load('sample.conf', fallback_file='default.conf')
     >>> fc['general']['spam']
     eggs
-    
+
 Read the full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
