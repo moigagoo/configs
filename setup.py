@@ -1,5 +1,7 @@
 from distutils.core import setup
 
+import configs
+
 setup(
     name=configs.__title__,
     version=configs.__version__,
