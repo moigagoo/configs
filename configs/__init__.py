@@ -20,7 +20,7 @@ Load a config file with a fallback config file (with default values)::
     >>> fc['general']['spam']
     eggs
 
-See full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
+See the full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
 
 The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/configs>`_.
 """
