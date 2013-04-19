@@ -6,3 +6,4 @@ lib
 *.kdev4
 dist/
 MANIFEST
+docs/_build

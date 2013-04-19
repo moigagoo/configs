@@ -1,15 +1,15 @@
 from distutils.core import setup
 
 setup(
-    name='configs',
-    version='1.7',
+    name=configs.__title__,
+    version=configs.__version__,
+    author=configs.__author__,
     description='Configuration for humans',
-    author='Konstantin Molchanov',
+    long_description=open('README.rst').read(),
     author_email='moigagoo@myopera.com',
     url='https://bitbucket.org/moigagoo/configs',
-    py_modules=['configs'],
-    data_files=[
-        ('test', ['test.conf', 'fallback.conf']),
-    ],
-    license='MIT'
+    packages=['configs'],
+    package_dir={'configs': 'configs'},
+    package_data={'configs': ['*.conf']},
+    license=configs.__license__
 )

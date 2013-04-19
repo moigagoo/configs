@@ -1,0 +1,178 @@
+*********************************
+Configs: Configuration for Humans
+*********************************
+
+.. toctree::
+    :maxdepth: 2
+    :hidden:
+
+    apidocs/index
+
+Parsing INI configs must be easy, as are INI files.
+
+**Configs** provides a simple API for getting data from INI config files.
+
+Loading data from a config is as easy as ``configs.load(my.conf)``.
+
+``Configs`` work with both Python 2 and 3.
+
+Features
+========
+
+*   Root-level params (with no section)
+*   Numeric values are converted automatically
+*   Sections with only key-value items are parsed as dicts
+*   Sections with only flag items (keys with no value) are parsed as lists
+*   Mixed content sections are parsed as tuples of a dict and a list, which can be accessed individually
+*   Sections are iterable (even the mixed ones; list first, dict second)
+*   Comments
+
+Installation
+============
+
+Install configs with pip:
+
+.. code-block:: bash
+
+    $ pip install configs
+
+Read the full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
+
+Usage
+=====
+
+Sample config file (``sample.conf``)::
+
+    path = some_path
+
+    [general]
+    foo = baz
+
+    [list_section]
+    7.1
+    42
+
+    [new_section]
+    new_key = new_value
+    flag
+
+    ;Commented lines
+    ;are ignored
+
+Load the file::
+
+    >>> import configs
+    >>> c = configs.load('sample.conf')
+
+Get all values::
+
+    >>> c
+    {'list_section': [7.1, 42], 'new_section': {'new_key': 'new_value'}, 'root': {'path': 'some_path'}, 'general': {'foo': 'baz'}, 'mixed': (['flag'], {'prop': 'val'})}
+
+Get section::
+
+    >>> c['general']
+    {'foo': 'baz'}
+
+Get a single value::
+
+    >>> c['general']['foo']
+    baz
+
+    >>> c['path']
+    some_path
+
+    >>> c['root']['path']
+    some_path
+
+    >>> c['list_section'][1]
+    42
+
+Numeric values are parsed as numbers::
+
+    >>> c['list_section'][1] + 3
+    45
+
+    >>> c['list_section'][0] * 2
+    14.2
+
+Iterate over a section::
+
+    >>> for key in c['general']:
+        print(key, c['general'][key])
+    foo baz
+
+    >>> for value in c['list_section']:
+        print(value)
+    7.1
+    42
+
+    >>> for mix in c['mixed']:
+        print(mix)
+    flag
+    prop
+
+    >>> c['mixed'].dict_props
+    'prop': 'val'}
+
+    >>> c['mixed'].list_props
+    flag
+
+.. versionadded:: 1.4
+
+Fallback Config
+---------------
+
+It is possible to define a fallback configuration when loading a config.
+
+If the loaded config does not have some values defined in the fallback config, the default values will be used.
+
+Fallback config file (``default.conf``)::
+
+    top_level = value
+    path = ../
+    url = http://example.com
+
+    [general]
+    spam = eggs
+    foo = bar
+
+    [list_section]
+    1
+    2.2
+    3
+
+    ;Commented line
+
+Use the optional ``fallback_file`` parameter of the :func:`load <configs.api.load>` method::
+
+    >>> fc = configs.load('sample.conf', fallback_file='default.conf')
+
+    >>> fc
+    {'list_section': [1, 2.2, 3, 7.1, 42], 'new_section': {'new_key': 'new_value'}, 'root': {'url': 'http://example.com', 'top_level': 'value', 'path': 'some_path'}, 'general': {'spam': 'eggs', 'foo': 'baz'}, 'mixed': (['flag'], {'prop': 'val'})}
+
+    >>> fc['general']['spam']
+    eggs
+
+.. warning::
+
+    In config files, colons cannot be used as the assignment sign. Use only the equal sign: **=**.
+
+    This will fail::
+
+        wrong_assignment: wrong_value
+
+    This will work::
+
+        pretty = nice
+
+    This is done to allow passing URLs as values, e.g.::
+
+        example_url = http://example.com
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
