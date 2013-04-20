@@ -8,11 +8,11 @@ Configs: Configuration for Humans
 
     apidocs/index
 
-Parsing INI configs must be easy, as are INI files.
+Parsing INI configs must be easy, as are the INI files.
 
 **Configs** provides a simple API for getting data from INI config files.
 
-Loading data from a config is as easy as ``configs.load(my.conf)``.
+Loading data from a config is as easy as ``configs.load('my.conf')``.
 
 ``Configs`` work with both Python 2 and 3.
 
@@ -21,13 +21,13 @@ The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/c
 Features
 ========
 
-*   Root-level params (with no section)
+*   Root-level params support
 *   Numeric values are converted automatically
 *   Sections with only key-value items are parsed as dicts
 *   Sections with only flag items (keys with no value) are parsed as lists
 *   Mixed content sections are parsed as tuples of a dict and a list, which can be accessed individually
 *   Sections are iterable (even the mixed ones; list first, dict second)
-*   Comments
+*   Comments support
 
 Installation
 ============
@@ -42,6 +42,18 @@ Read the full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
 
 Usage
 =====
+
+.. sidebar:: Note
+
+    In order to support URL values (e.g. ``http://example.com``), colons cannot be used as the assignment sign. Use only the equal sign: **=**.
+
+    This will fail::
+
+        wrong_assignment: wrong_value
+
+    This will work::
+
+        pretty = nice
 
 Sample config file (``sample.conf``)::
 
@@ -64,6 +76,7 @@ Sample config file (``sample.conf``)::
 Load the file::
 
     >>> import configs
+
     >>> c = configs.load('sample.conf')
 
 Get all values::
@@ -120,10 +133,10 @@ Iterate over a section::
     >>> c['mixed'].list_props
     flag
 
-.. versionadded:: 1.4
-
 Fallback Config
 ---------------
+
+.. versionadded:: 1.4
 
 It is possible to define a fallback configuration when loading a config.
 
@@ -155,22 +168,6 @@ Use the optional ``fallback_file`` parameter of the :func:`load <configs.api.loa
 
     >>> fc['general']['spam']
     eggs
-
-.. warning::
-
-    In config files, colons cannot be used as the assignment sign. Use only the equal sign: **=**.
-
-    This will fail::
-
-        wrong_assignment: wrong_value
-
-    This will work::
-
-        pretty = nice
-
-    This is done to allow passing URLs as values, e.g.::
-
-        example_url = http://example.com
 
 Indices and tables
 ==================
