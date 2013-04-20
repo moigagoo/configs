@@ -2,27 +2,26 @@
 Configs: Configuration for Humans
 *********************************
 
-Parsing INI configs must be easy, as are INI files.
+Parsing INI configs must be easy, as are the INI files.
 
 **Configs** provides a simple API for getting data from INI config files.
 
-Loading data from a config is as easy as ``configs.load(my.conf)``.
+Loading data from a config is as easy as ``configs.load('my.conf')``.
 
 ``Configs`` work with both Python 2 and 3.
-
-See the full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
 
 The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/configs>`_.
 
 Features
 ========
 
-*   Root-level params (with no section)
+*   Root-level params support
 *   Numeric values are converted automatically
 *   Sections with only key-value items are parsed as dicts
 *   Sections with only flag items (keys with no value) are parsed as lists
-*   Mixed content sections are parsed as a dict and a list, which can be accessed individually
-*   Sections are iterable (even the mixed ones)
+*   Mixed content sections are parsed as tuples of a dict and a list, which can be accessed individually
+*   Sections are iterable (even the mixed ones; list first, dict second)
+*   Comments support
 
 Installation
 ============
@@ -31,7 +30,7 @@ Install configs with pip:
 
 .. code-block:: bash
 
-    % pip install configs
+    $ pip install configs
 
 Basic usage
 ===========
@@ -47,5 +46,3 @@ Load a config file with a fallback config file (with default values)::
     >>> fc = configs.load('sample.conf', fallback_file='default.conf')
     >>> fc['general']['spam']
     eggs
-
-Read the full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
