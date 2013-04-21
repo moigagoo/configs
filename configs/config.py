@@ -22,8 +22,6 @@ class Config:
     _list_item = re.compile('^\s*(?P<value>.+)\s*$')
 
     def __init__(self, config_file=None, fallback=None):
-        self.config_file = config_file
-
         if fallback:
             self.sections = fallback.sections
         else:
@@ -32,6 +30,9 @@ class Config:
 
         if config_file:
             self.load(config_file)
+            self.config_file = config_file
+        else:
+            self.config_file = fallback.config_file
 
     def get(self):
         """Gets all section items."""
