@@ -7,6 +7,7 @@ setup(
     version=configs.__version__,
     author=configs.__author__,
     description='Configuration for humans',
+    long_description=open('README.rst').read(),
     author_email='moigagoo@myopera.com',
     url='https://bitbucket.org/moigagoo/configs',
     packages=['configs'],
