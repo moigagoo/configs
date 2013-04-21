@@ -22,6 +22,8 @@ class Config:
     _list_item = re.compile('^\s*(?P<value>.+)\s*$')
 
     def __init__(self, config_file=None, fallback=None):
+        self.config_file = config_file
+
         if fallback:
             self.sections = fallback.sections
         else:
@@ -38,9 +40,9 @@ class Config:
 
     def load(self, config_file):
         """Parse an INI configuration file.
-        
+
         :param config_file: configuration file to be loaded.
-        
+
         :returns: :class:Config instance.
         """
 
@@ -83,15 +85,15 @@ class Config:
 
     def _add_section(self, name):
         """Adds an empty section with the given name.
-        
-        :param name: new section name.        
+
+        :param name: new section name.
         """
 
         self.sections[name] = Section()
 
     def _add_dict_prop_to_section(self, key, value, section='root'):
         """Adds a key-value item to the given section.
-        
+
         :param key: new item key.
         :param value: new item value.
         :param section: (optional) section name (``root`` by default).
@@ -104,7 +106,7 @@ class Config:
 
     def _add_list_prop_to_section(self, value, section='root'):
         """Adds a flag value to the given section.
-        
+
         :param value: new item value.
         :param section: (optional) section name (``root`` by default).
         """
