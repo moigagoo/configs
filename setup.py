@@ -13,5 +13,12 @@ setup(
     packages=['configs'],
     package_dir={'configs': 'configs'},
     package_data={'configs': ['*.conf']},
+    include_package_data = True,
     license=configs.__license__,
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'Natural Language :: English',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3'])
 )
