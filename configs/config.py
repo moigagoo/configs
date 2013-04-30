@@ -49,7 +49,7 @@ class Config:
 
         current_section = None
 
-        with open(config_file, 'r') as f:
+        with open(config_file) as f:
             for line in f.readlines():
                 comment_match = re.match(self._comment, line)
                 if comment_match:

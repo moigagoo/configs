@@ -26,7 +26,7 @@ The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/c
 """
 
 __title__ = 'configs'
-__version__ = '1.9.5'
+__version__ = '2.0.1'
 __author__ = 'Konstantin Molchanov'
 __license__ = 'MIT'
 

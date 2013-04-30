@@ -24,7 +24,7 @@ Features
 ========
 
 *   Root-level params support
-*   Numeric values are converted automatically
+*   Numeric and boolean values are converted automatically
 *   Sections with only key-value items are parsed as dicts
 *   Sections with only flag items (keys with no value) are parsed as lists
 *   Mixed content sections are parsed as tuples of a dict and a list, which can be accessed individually
@@ -55,23 +55,9 @@ Usage
 
         pretty = nice
 
-Sample config file (``sample.conf``)::
+Sample config file (``sample.conf``):
 
-    path = some_path
-
-    [general]
-    foo = baz
-
-    [list_section]
-    7.1
-    42
-
-    [new_section]
-    new_key = new_value
-    flag
-
-    ;Commented lines
-    ;are ignored
+.. literalinclude:: ../configs/sample.conf
 
 Load the file::
 
@@ -82,7 +68,7 @@ Load the file::
 Get all values::
 
     >>> c
-    {'list_section': [7.1, 42], 'new_section': {'new_key': 'new_value'}, 'root': {'path': 'some_path'}, 'general': {'foo': 'baz'}, 'mixed': (['flag'], {'prop': 'val'})}
+    {'root': {'path': 'some_path'}, 'new_section': {'new_key': 'new_value'}, 'mixed': (['flag'], {'prop': 'val', 'boolean': False}), 'general': {'foo': 'baz'}, 'list_section': [7.1, 42]}
 
 Get section::
 
@@ -142,22 +128,9 @@ It is possible to define a fallback configuration when loading a config.
 
 If the loaded config does not have some values defined in the fallback config, the default values will be used.
 
-Fallback config file (``default.conf``)::
+Fallback config file (``default.conf``):
 
-    top_level = value
-    path = ../
-    url = http://example.com
-
-    [general]
-    spam = eggs
-    foo = bar
-
-    [list_section]
-    1
-    2.2
-    3
-
-    ;Commented line
+.. literalinclude:: ../configs/default.conf
 
 Use the optional ``fallback_file`` parameter of the :func:`load <configs.api.load>` method::
 
@@ -168,6 +141,16 @@ Use the optional ``fallback_file`` parameter of the :func:`load <configs.api.loa
 
     >>> fc['general']['spam']
     eggs
+
+.. versionadded:: 2.0.1
+
+Boolean values are converted automatically.
+
+Use the special ``True`` and ``False`` values to declare boolean type (case matters!)::
+
+    this_is_a_boolean_value = True
+    this_is_a_string = true
+    this_is_a_number = 1
 
 Indices and tables
 ==================

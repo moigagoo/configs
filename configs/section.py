@@ -13,7 +13,7 @@ class Section:
 
     It is possible to iterate over a section; flag values are listed first, then key-value items.
     """
-    
+
     def __init__(self):
         self.dict_props = {}
         self.list_props = []
@@ -27,7 +27,7 @@ class Section:
 
         If section contains both flag and key-value items, a tuple of both is returned.
         """
-        
+
         if self.list_props and self.dict_props:
             return self.list_props, self.dict_props
 
@@ -36,22 +36,30 @@ class Section:
     def _add_dict_prop(self, key, value):
         """Adds a key-value item to section."""
 
-        try:
-            value = float(value)
-            value = int(value)
-        except ValueError:
-            pass
+        if value == 'True':
+            value = True
+        elif value == 'False':
+            value = False
+        else:
+            try:
+                value = float(value)
+                value = int(value)
+            except ValueError:
+                pass
 
         self.dict_props[key] = value
 
     def _add_list_prop(self, value):
         """Adds a flag value to  section."""
 
-        try:
-            value = int(value)
-        except ValueError:
+        if value == 'True':
+            value = True
+        elif value == 'False':
+            value = False
+        else:
             try:
                 value = float(value)
+                value = int(value)
             except ValueError:
                 pass
 
