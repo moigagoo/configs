@@ -16,7 +16,7 @@ Features
 ========
 
 *   Root-level params support
-*   Numeric values are converted automatically
+*   Numeric and boolean values are converted automatically
 *   Sections with only key-value items are parsed as dicts
 *   Sections with only flag items (keys with no value) are parsed as lists
 *   Mixed content sections are parsed as tuples of a dict and a list, which can be accessed individually
