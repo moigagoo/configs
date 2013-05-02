@@ -12,6 +12,8 @@ Loading data from a config is as easy as ``configs.load('my.conf')``.
 
 The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/configs>`_.
 
+Read the full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
+
 Features
 ========
 
