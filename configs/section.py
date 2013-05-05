@@ -33,37 +33,32 @@ class Section:
 
         return self.list_props or self.dict_props or None
 
+    def _get_value_type(self, value):
+        if value == 'True':
+            return True
+        elif value == 'False':
+            return False
+        else:
+            try:
+                return_value = int(value)
+            except ValueError:
+                try:
+                    return_value = float(value)
+                except ValueError:
+                    return value
+
+            return return_value
+
+
     def _add_dict_prop(self, key, value):
         """Adds a key-value item to section."""
 
-        if value == 'True':
-            value = True
-        elif value == 'False':
-            value = False
-        else:
-            try:
-                value = float(value)
-                value = int(value)
-            except ValueError:
-                pass
-
-        self.dict_props[key] = value
+        self.dict_props[key] = self._get_value_type(value)
 
     def _add_list_prop(self, value):
         """Adds a flag value to  section."""
 
-        if value == 'True':
-            value = True
-        elif value == 'False':
-            value = False
-        else:
-            try:
-                value = float(value)
-                value = int(value)
-            except ValueError:
-                pass
-
-        self.list_props.append(value)
+        self.list_props.append(self._get_value_type(value))
 
     def __repr__(self):
         return str(self.get())
