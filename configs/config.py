@@ -21,18 +21,15 @@ class Config:
     _dict_item = re.compile('^\s*(?P<key>\w+)\s*\=\s*(?P<value>.+)\s*$')
     _list_item = re.compile('^\s*(?P<value>.+)\s*$')
 
-    def __init__(self, config_file=None, fallback=None):
-        if fallback:
-            self.sections = fallback.sections
+    def __init__(self, config_file, fallback_file=None):
+        if fallback_file:
+            self.sections = Config(fallback_file).sections
         else:
             self.sections = {}
             self._add_section('root')
 
-        if config_file:
-            self.load(config_file)
-            self.config_file = config_file
-        else:
-            self.config_file = fallback.config_file
+        self.load(config_file)
+        self.config_file = config_file
 
     def get(self):
         """Gets all section items."""

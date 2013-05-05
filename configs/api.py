@@ -24,8 +24,4 @@ def load(config_file, fallback_file=None):
         eggs
     """
 
-    if fallback_file:
-        return Config(config_file, Config(fallback_file))
-    else:
-        return Config(config_file)
-
+    return Config(config_file, fallback_file)
