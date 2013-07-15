@@ -16,7 +16,7 @@ Parsing INI configs must be easy, as are the INI files.
 
 Loading data from a config is as easy as ``configs.load('my.conf')``.
 
-``Configs`` work with both Python 2 and 3 (+ PyPy.)
+``Configs`` work with Python 2.7+.
 
 The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/configs>`_.
 
