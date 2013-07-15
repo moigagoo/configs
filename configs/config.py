@@ -131,5 +131,12 @@ class Config:
 
         return None
 
+    def __setitem__(self, key, value):
+        try:
+            self.sections['root'][key] = value
+            return None
+        except KeyError as e:
+            raise e
+
     def __eq__(self, other):
         return self.sections == other.sections

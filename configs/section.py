@@ -86,5 +86,19 @@ class Section:
 
         return None
 
+    def __setitem__(self, key, value):
+        try:
+            self.dict_props[key] = value
+            return None
+        except KeyError:
+            pass
+
+        try:
+            self.list_props[key] = value
+            return None
+        except (KeyError, TypeError) as e:
+            raise e
+
+
     def __eq__(self, other):
         return self.dict_props == other.dict_props and self.list_props == other.list_props
