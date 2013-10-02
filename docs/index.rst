@@ -112,7 +112,7 @@ Iterate over a section::
     prop
 
     >>> c['mixed'].dict_props
-    'prop': 'val'}
+    {'prop': 'val'}
 
     >>> c['mixed'].list_props
     flag
