@@ -7,6 +7,7 @@ This module contains the :class:`Config <Config>` class.
 """
 
 import re
+from os.path import abspath
 
 from .section import Section
 
@@ -29,7 +30,6 @@ class Config:
             self._add_section('root')
 
         self.load(config_file)
-        self.config_file = config_file
 
     def get(self):
         """Gets all section items."""
@@ -80,6 +80,8 @@ class Config:
                         self._add_list_prop_to_section(value)
 
                     continue
+
+            self.config_full_path = abspath(f.name)
 
     def _add_section(self, name):
         """Adds an empty section with the given name.
