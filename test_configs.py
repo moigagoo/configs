@@ -43,6 +43,11 @@ class TestApi(unittest.TestCase):
         self.assertIsInstance(api.load(self.sample_config_filename)['list_section'][1], int)
         self.assertIsInstance(api.load(self.sample_config_filename)['mixed']['boolean'], bool)
 
+    def test_load_with_defaults(self):
+        """Checks if a valid config file with valid defaults is parsed correctly"""
+
+        self.assertIsInstance(api.load(self.sample_config_filename, defaults={'default_key': 'default_value'}), Config)
+
 
 if __name__ == '__main__':
     unittest.main()
