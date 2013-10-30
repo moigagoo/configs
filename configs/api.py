@@ -13,7 +13,7 @@ def load(config_file, fallback_file=None, defaults={}):
 
     :param config_file: configuration file to be parsed
     :param fallback_file: (optional) fallback configuration file with default values to be used if missing in the ``config_file``
-    :param: defaults: (optional) dict of default values to be used if missing in both ``config_file`` and ``fallback_file``
+    :param defaults: (optional) dict of default values to be used if missing in both ``config_file`` and ``fallback_file``
 
     Usage::
 

@@ -140,6 +140,21 @@ Use the optional ``fallback_file`` parameter of the :func:`load <configs.api.loa
     >>> fc['general']['spam']
     eggs
 
+The `defaults` Dict
+-------------------
+
+.. versionadded:: 2.0.5
+
+You can pass a dict of default values to be loaded into the `root` section in the `defaults` param of the :func:`load <configs.api.load>` method::::
+
+    >> dc = configs.load('sample.conf', defaults={'defaul_key': 'default_value'})
+
+    >>> dc
+    {'list_section': [1, 2.2, 3, 7.1, 42], 'new_section': {'new_key': 'new_value'}, 'root': {'url': 'http://example.com', 'top_level': 'value', 'path': 'some_path', 'defaul_key': 'default_value'}, 'general': {'spam': 'eggs', 'foo': 'baz'}, 'mixed': (['flag'], {'prop': 'val'})}
+
+    >>> fc['defaul_key']
+    default_value
+
 .. versionadded:: 2.0.1
 
 Boolean values are converted automatically.
