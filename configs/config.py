@@ -32,10 +32,22 @@ class Config:
 
         self.load(config_file)
 
-    def get(self):
+    def get_config(self):
         """Gets all section items."""
 
-        return {section: self.sections[section].get() for section in self.sections}
+        return {section: self.sections[section].get_section() for section in self.sections}
+
+    def get(self, key):
+        """Tries to get a value from the ``root`` section dict_props by the given key.
+        
+        :param key: lookup key.
+        :returns: value if key exists, None otherwise.
+        """
+
+        if key in self.sections:
+            return self.sections[key]
+
+        return self['root'].get(key)
 
     def load(self, config_file):
         """Parse an INI configuration file.
@@ -118,10 +130,10 @@ class Config:
             raise KeyError
 
     def __repr__(self):
-        return str(self.get())
+        return str(self.get_config())
 
     def __str__(self):
-        return str(self.get())
+        return str(self.get_config())
 
     def __getitem__(self, key):
         if key in self.sections:
@@ -132,7 +144,7 @@ class Config:
             except KeyError:
                 pass
 
-        return None
+        raise KeyError(key)
 
     def __setitem__(self, key, value):
         try:

@@ -18,7 +18,7 @@ class Section:
         self.dict_props = {}
         self.list_props = []
 
-    def get(self):
+    def get_section(self):
         """Gets section values.
 
         If section contains only flag values, a list is returned.
@@ -33,7 +33,23 @@ class Section:
 
         return self.list_props or self.dict_props or None
 
+    def get(self, key):
+        """Tries to get a value from the dict_props by the given key.
+        
+        :param key: lookup key.
+        :returns: value if key exists, None otherwise.
+        """
+
+        return self.dict_props.get(key)
+
     def _get_value_type(self, value):
+        """Checks if the given value is boolean, float, int, of str.
+
+        Returns converted value if conversion is possible.
+
+        :param value: value to check.
+        """
+
         if value == 'True':
             return True
         elif value == 'False':
@@ -61,10 +77,10 @@ class Section:
         self.list_props.append(self._get_value_type(value))
 
     def __repr__(self):
-        return str(self.get())
+        return str(self.get_section())
 
     def __str__(self):
-        return str(self.get())
+        return str(self.get_section())
 
     def __iter__(self):
         for list_prop in self.list_props:
@@ -84,7 +100,7 @@ class Section:
         except (KeyError, TypeError):
             pass
 
-        return None
+        raise KeyError(key)
 
     def __setitem__(self, key, value):
         try:
