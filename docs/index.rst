@@ -145,7 +145,7 @@ The `defaults` Dict
 
 .. versionadded:: 2.0.5
 
-You can pass a dict of default values to be loaded into the `root` section in the `defaults` param of the :func:`load <configs.api.load>` method::::
+You can pass a dict of default values to be loaded into the `root` section in the `defaults` param of the :func:`load <configs.api.load>` method::
 
     >> dc = configs.load('sample.conf', defaults={'defaul_key': 'default_value'})
 
