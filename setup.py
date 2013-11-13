@@ -13,7 +13,7 @@ setup(
     author=configs.__author__,
     description='Configuration for humans',
     long_description=readme,
-    author_email='moigagoo@myopera.com',
+    author_email='moigagoo@live.com',
     url='https://bitbucket.org/moigagoo/configs',
     packages=['configs'],
     package_dir={'configs': 'configs'},
