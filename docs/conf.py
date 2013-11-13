@@ -50,7 +50,9 @@ copyright = '2013, Konstantin @moigagoo Molchanov'
 #
 # The short X.Y version.
 from configs import __version__
+
 version = __version__
+
 # The full version, including alpha/beta/rc tags.
 release = __version__
 
