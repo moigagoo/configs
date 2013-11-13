@@ -39,7 +39,7 @@ class Config:
 
     def get(self, key):
         """Tries to get a value from the ``root`` section dict_props by the given key.
-        
+
         :param key: lookup key.
         :returns: value if key exists, None otherwise.
         """
@@ -54,7 +54,7 @@ class Config:
 
         :param config_file: configuration file to be loaded.
 
-        :returns: :class:Config instance.
+        :returns: :class:`Config <Config>` instance.
         """
 
         current_section = None

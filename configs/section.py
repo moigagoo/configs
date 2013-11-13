@@ -35,7 +35,7 @@ class Section:
 
     def get(self, key):
         """Tries to get a value from the dict_props by the given key.
-        
+
         :param key: lookup key.
         :returns: value if key exists, None otherwise.
         """
