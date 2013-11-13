@@ -8,6 +8,14 @@ Configs: Configuration for Humans
 
     apidocs/index
 
+.. image:: https://pypip.in/v/configs/badge.png
+    :target: https://crate.io/packages/configs/
+    :alt: Latest PyPI version
+
+.. image:: https://pypip.in/d/configs/badge.png
+    :target: https://crate.io/packages/configs/
+    :alt: Number of PyPI downloads
+
 Parsing INI configs must be easy, as are the INI files.
 
 **Configs** provides a simple API for getting data from INI config files.
