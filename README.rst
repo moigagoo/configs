@@ -2,13 +2,17 @@
 Configs: Configuration for Humans
 *********************************
 
-.. image:: http://img.shields.io/pypi/v/configs.svg
-    :target: http://pypi.python.org/pypi/configs/
-    :alt: Latest PyPI version
+.. image:: https://pypip.in/v/configs/badge.png
+    :target: https://pypi.python.org/pypi/configs/
+    :alt: Latest Version
 
-.. image:: http://img.shields.io/pypi/dm/configs.svg
-    :target: http://pypi.python.org/pypi/configs/
-    :alt: Number of PyPI downloads
+.. image:: https://pypip.in/d/configs/badge.png
+    :target: https://pypi.python.org/pypi/configs/
+    :alt: Downloads
+
+.. image:: https://pypip.in/wheel/configs/badge.png
+    :target: https://pypi.python.org/pypi/configs/
+    :alt: Wheel Status
 
 Parsing INI configs must be easy, as are the INI files.
 
