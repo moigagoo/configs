@@ -9,12 +9,16 @@ Configs: Configuration for Humans
     apidocs/index
 
 .. image:: https://pypip.in/v/configs/badge.png
-    :target: https://crate.io/packages/configs/
-    :alt: Latest PyPI version
+    :target: https://pypi.python.org/pypi/configs/
+    :alt: Latest Version
 
 .. image:: https://pypip.in/d/configs/badge.png
-    :target: https://crate.io/packages/configs/
-    :alt: Number of PyPI downloads
+    :target: https://pypi.python.org/pypi/configs/
+    :alt: Downloads
+
+.. image:: https://pypip.in/wheel/configs/badge.png
+    :target: https://pypi.python.org/pypi/configs/
+    :alt: Wheel Status
 
 Parsing INI configs must be easy, as are the INI files.
 
