@@ -11,10 +11,11 @@ from os.path import abspath
 
 from .section import Section
 
+
 class Config:
     """Parsed configuration.
 
-    Config instance includes a list of :class:`Section <Section>` instances.
+    Config instance includes a list of :class:`Section <configs.section.Section>` instances.
     """
 
     _comment = re.compile('^\s*;.*$')
@@ -22,7 +23,13 @@ class Config:
     _dict_item = re.compile('^\s*(?P<key>\w+)\s*\=\s*(?P<value>.+)\s*$')
     _list_item = re.compile('^\s*(?P<value>.+)\s*$')
 
-    def __init__(self, config_file, fallback_file=None, defaults={}):
+    def __init__(
+            self,
+            config_file: str,
+            fallback_file: str = None,
+            defaults: dict = {}
+            ):
+
         if fallback_file:
             self.sections = Config(fallback_file).sections
         else:
@@ -33,15 +40,18 @@ class Config:
         self.load(config_file)
 
     def get_config(self):
-        """Gets all section items."""
+        """Gets all section items.
+        
+        :returns: dictionary with section name as key and section values and value.
+        """
 
-        return {section: self.sections[section].get_section() for section in self.sections}
+        return {section: self.sections[section].get_values() for section in self.sections}
 
-    def get(self, key):
+    def get(self, key: str):
         """Tries to get a value from the ``root`` section dict_props by the given key.
 
         :param key: lookup key.
-        :returns: value if key exists, None otherwise.
+        :returns: value (str, bool, int, or float) if key exists, None otherwise.
         """
 
         if key in self.sections:
@@ -49,12 +59,10 @@ class Config:
 
         return self['root'].get(key)
 
-    def load(self, config_file):
+    def load(self, config_file: str):
         """Parse an INI configuration file.
 
         :param config_file: configuration file to be loaded.
-
-        :returns: :class:`Config <Config>` instance.
         """
 
         current_section = None
@@ -96,7 +104,7 @@ class Config:
 
             self.config_full_path = abspath(f.name)
 
-    def _add_section(self, name):
+    def _add_section(self, name: str):
         """Adds an empty section with the given name.
 
         :param name: new section name.
@@ -104,7 +112,7 @@ class Config:
 
         self.sections[name] = Section()
 
-    def _add_dict_prop_to_section(self, key, value, section='root'):
+    def _add_dict_prop_to_section(self, key: str, value: str, section: str = 'root'):
         """Adds a key-value item to the given section.
 
         :param key: new item key.
@@ -117,7 +125,7 @@ class Config:
         else:
             raise KeyError
 
-    def _add_list_prop_to_section(self, value, section='root'):
+    def _add_list_prop_to_section(self, value: str, section='root'):
         """Adds a flag value to the given section.
 
         :param value: new item value.

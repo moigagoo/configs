@@ -8,7 +8,11 @@ This module implements the configs API.
 
 from .config import Config
 
-def load(config_file, fallback_file=None, defaults={}):
+def load(
+        config_file: str,
+        fallback_file: str = None,
+        defaults: dict = {}
+        ) -> Config:
     """Constructs and returns a :class:`Config <Config>` instance.
 
     :param config_file: configuration file to be parsed
