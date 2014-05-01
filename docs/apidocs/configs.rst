@@ -5,7 +5,7 @@ configs Package
 :mod:`configs` Package
 ======================
 
-.. automodule:: configs.__init__
+.. automodule:: configs
     :members:
     :undoc-members:
     :show-inheritance:
