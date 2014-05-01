@@ -1,11 +1,3 @@
-"""
-***************
-configs.section
-***************
-
-This module contains the :class:`Section <Section>` class.
-"""
-
 class Section:
     """INI configuration section.
 

@@ -1,11 +1,3 @@
-"""
-***********
-configs.api
-***********
-
-This module implements the configs API.
-"""
-
 from .config import Config
 
 def load(

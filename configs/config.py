@@ -1,11 +1,3 @@
-"""
-**************
-configs.config
-**************
-
-This module contains the :class:`Config <Config>` class.
-"""
-
 import re
 from os.path import abspath
 
