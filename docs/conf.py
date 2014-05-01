@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Configs: Configuration for Humans'
-copyright = '2013, Konstantin @moigagoo Molchanov'
+copyright = '2014, Konstantin @moigagoo Molchanov'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
