@@ -15,19 +15,9 @@ class Config:
     _dict_item = re.compile('^\s*(?P<key>\w+)\s*\=\s*(?P<value>.+)\s*$')
     _list_item = re.compile('^\s*(?P<value>.+)\s*$')
 
-    def __init__(
-            self,
-            config_file: str,
-            fallback_file: str = None,
-            defaults: dict = {}
-            ):
-
-        if fallback_file:
-            self.sections = Config(fallback_file).sections
-        else:
-            self.sections = {}
-            self._add_section('root')
-            self.sections['root'].dict_props = defaults
+    def __init__(self, config_file):
+        self.sections = {}
+        self._add_section('root')
 
         self.load(config_file)
 

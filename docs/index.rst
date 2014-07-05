@@ -26,7 +26,7 @@ Parsing INI configs must be easy, as are the INI files.
 
 Loading data from a config is as easy as ``configs.load('my.conf')``.
 
-``Configs`` work with Python 2.7+.
+``Configs`` work with Python 2.7+ and 3.
 
 The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/configs>`_.
 
@@ -132,6 +132,12 @@ Iterate over a section::
 Fallback Config
 ---------------
 
+.. deprecated:: 3.0.1
+
+.. note::
+
+	Fallback support was removed because it was used about 0 times.
+
 .. versionadded:: 1.4
 
 It is possible to define a fallback configuration when loading a config.
@@ -154,6 +160,12 @@ Use the optional ``fallback_file`` parameter of the :func:`load <configs.api.loa
 
 The `defaults` Dict
 -------------------
+
+.. deprecated:: 3.0.1
+
+.. warning::
+
+	This functionality was buggy and unstable. Also, real life proved it (as well as the fallback file support) quite unnecessary.
 
 .. versionadded:: 2.0.5
 
