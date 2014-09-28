@@ -25,7 +25,7 @@ class Section:
 
         return self.list_props or self.dict_props or None
 
-    def get(self, key: str):
+    def get(self, key):
         """Tries to get a value from the dict_props by the given key.
 
         :param key: lookup key.
@@ -42,6 +42,8 @@ class Section:
         :param value: value to check.
         """
 
+        value = value.strip()
+
         if value == 'True':
             return True
         elif value == 'False':
@@ -57,15 +59,31 @@ class Section:
 
             return return_value
 
-    def _add_dict_prop(self, key: str, value: str):
+    def _add_dict_prop(self, key, value):
         """Adds a key-value item to section."""
 
-        self.dict_props[key] = self._get_value_type(value)
+        typed_value_map = map(self._get_value_type, value.split(','))
 
-    def _add_list_prop(self, value: str):
+        typed_value_tuple = tuple(typed_value_map)
+
+        if len(typed_value_tuple) == 1:
+            self.dict_props[key] = typed_value_tuple[0]
+        
+        else:
+            self.dict_props[key] = typed_value_tuple
+
+
+    def _add_list_prop(self, value):
         """Adds a flag value to  section."""
 
-        self.list_props.append(self._get_value_type(value))
+        typed_value_map = map(self._get_value_type, value.split(','))
+
+        typed_value_tuple = tuple(typed_value_map)
+
+        if len(typed_value_tuple) == 1:
+            self.list_props.append(typed_value_tuple[0])
+        else:
+            self.list_props.append(typed_value_tuple)
 
     def __repr__(self):
         return str(self.get_values())

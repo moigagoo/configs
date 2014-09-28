@@ -20,7 +20,7 @@ The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/c
 """
 
 __title__ = 'configs'
-__version__ = '3.0.1'
+__version__ = '3.0.2'
 __author__ = 'Konstantin Molchanov'
 __license__ = 'MIT'
 
