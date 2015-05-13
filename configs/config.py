@@ -29,7 +29,7 @@ class Config:
 
         return {section: self.sections[section].get_values() for section in self.sections}
 
-    def get(self, key: str):
+    def get(self, key):
         """Tries to get a value from the ``root`` section dict_props by the given key.
 
         :param key: lookup key.
@@ -41,7 +41,7 @@ class Config:
 
         return self['root'].get(key)
 
-    def load(self, config_file: str):
+    def load(self, config_file):
         """Parse an INI configuration file.
 
         :param config_file: configuration file to be loaded.
@@ -86,7 +86,7 @@ class Config:
 
             self.config_full_path = abspath(f.name)
 
-    def _add_section(self, name: str):
+    def _add_section(self, name):
         """Adds an empty section with the given name.
 
         :param name: new section name.
@@ -94,7 +94,7 @@ class Config:
 
         self.sections[name] = Section()
 
-    def _add_dict_prop_to_section(self, key: str, value: str, section: str = 'root'):
+    def _add_dict_prop_to_section(self, key, value, section='root'):
         """Adds a key-value item to the given section.
 
         :param key: new item key.
@@ -107,7 +107,7 @@ class Config:
         else:
             raise KeyError
 
-    def _add_list_prop_to_section(self, value: str, section='root'):
+    def _add_list_prop_to_section(self, value, section='root'):
         """Adds a flag value to the given section.
 
         :param value: new item value.
