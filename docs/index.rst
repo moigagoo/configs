@@ -78,23 +78,23 @@ Load the file::
 Get all values::
 
     >>> c
-    {'root': {'path': 'some_path'}, 'new_section': {'new_key': 'new_value'}, 'mixed': (['flag'], {'prop': 'val', 'boolean': False}), 'general': {'foo': 'baz'}, 'list_section': [7.1, 42]}
+    {'list_section': [7.1, 42, ('foo', 123)], 'root': {'path': 'some_path', 'hosts': ('example.com', 'http://bing.com', 'ssh.com:23', 'www.qwe.asd')}, 'mixed': (['flag'], {'boolean': False, 'prop': 'val', 'list': (12.3, 'eggs')})}
+Get root section::
 
-Get section::
+    >>> c['root']
+    {'path': 'some_path', 'hosts': ('example.com', 'http://bing.com', 'ssh.com:23', 'www.qwe.asd')}
 
-    >>> c['general']
-    {'foo': 'baz'}
+Get individial value::
 
-Get a single value::
+    >>> c['root']['path']
+    some_path
 
-    >>> c['general']['foo']
-    baz
+You can omit `[root]`::
 
     >>> c['path']
     some_path
 
-    >>> c['root']['path']
-    some_path
+List section values are accesses by index::
 
     >>> c['list_section'][1]
     42
@@ -109,9 +109,10 @@ Numeric values are parsed as numbers::
 
 Iterate over a section::
 
-    >>> for key in c['general']:
-        print(key, c['general'][key])
-    foo baz
+    >>> for key in c['root']:
+        print(key, c['root'][key])
+    path some_path
+    hosts ('example.com', 'http://bing.com', 'ssh.com:23', 'www.qwe.asd')
 
     >>> for value in c['list_section']:
         print(value)
