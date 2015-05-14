@@ -89,7 +89,7 @@ Get individial value::
     >>> c['root']['path']
     some_path
 
-You can omit `[root]`::
+You can omit ``[root]``::
 
     >>> c['path']
     some_path
