@@ -22,11 +22,11 @@ Loading data from a config is as easy as ``configs.load('my.conf')``.
 
 ``Configs`` work with Python 2.7+ (including 3).
 
-The repo is at `bitbucket.org/moigagoo/configs <https://bitbucket.org/moigagoo/configs>`_.
+The repo is at `github.com/moigagoo/configs <https://github.com/moigagoo/configs>`_.
 
 Read the full documentation at `configs.rtfd.org <http://configs.rtfd.org>`_.
 
-.. image:: https://op9bww.bn1302.livefilestore.com/y2phzX-gFw3yMuwMkL1HBwG23d-RWirCBlliDJ1dwR2VNPAG3Dp6LFJwpvnE3sPmr7-8V8HfC11mOsH-h7TAa1rzDHo0uuCks3PbTL7fM3PfGU/figs.jpg?psid=1
+.. image::  figs.jpg
     :align: center
     :width: 200
 
